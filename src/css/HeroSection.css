@@ -1,0 +1,42 @@
+  .hero-section {
+    padding: 10px;
+    margin-right: 10px;
+    position: relative;
+    width: 99%;
+    max-width: 1800px; 
+    margin: auto;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  .scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 10;
+    border-radius: 50%;
+  }
+
+  .left-btn {
+    left: 20px;
+  }
+
+  .right-btn {
+    right: 20px;
+  }
+
+  .scroll-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }

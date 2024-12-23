@@ -1,26 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../css/ProductSection.css';
-
-const products = [
-  { id: 1, title: 'Earbuds', img: '/productimages/earbuds.jpeg' },
-  { id: 2, title: 'Watch', img: '/productimages/watch.jpeg' },
-  { id: 3, title: 'Printer', img: '/productimages/printer.jpeg' },
-  { id: 4, title: 'Monitor', img: '/productimages/monitor.jpeg' },
-  { id: 5, title: 'Laptop', img: '/productimages/laptop.jpeg' },
-  { id: 6, title: 'LED Tv', img: '/productimages/ledtv.jpeg' },
-  { id: 7, title: 'Speaker', img: '/productimages/speaker.jpeg' },
-  // { id: 8, title: 'Hair Dryer', img: '/productimages/hairdryer.jpeg' },
-];
+import axios from 'axios';
 
 const ProductSection = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:5050/api/product/product_details')
+      .then((res) => {
+        console.log(res.data);
+        setProducts(res.data)
+      })
+      .catch((err) => {
+        console.error('Error fetching product data:', err);
+      });
+  }, []);
+
+  console.log(typeof products);
+  
   return (
     <div className="product-section">
       <h2>Best of Electronics</h2>
       <div className="product-list">
         {products.map((product) => (
-          <div key={product.id} className="product-card">
-            <img src={product.img} alt={product.title} />
-            <p>{product.title}</p>
+          <div key={product._id} className="product-card">
+            {product.path ? (
+              <img
+                src={`http://localhost:5050${product.path}`}
+                alt={product.title || 'Product Image'}
+                className="product-image"
+              />
+            ) : (
+              <div className="product-placeholder">No Image</div>
+            )}
+            <p>{product.title || 'No Title'}</p>
           </div>
         ))}
       </div>
